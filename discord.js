@@ -45,7 +45,7 @@ function joinDiscord() {
     // In a real implementation, this would open the Discord invite link
     // For now, we'll show a mock invite
     
-    const inviteUrl = "discord.gg/rnfS9DMC";
+    const inviteUrl = "https://discord.gg/stelasmp";
     
     // Show modal with Discord invite
     showDiscordInviteModal(inviteUrl);
@@ -110,23 +110,6 @@ function showDiscordInviteModal(inviteUrl) {
     // Add to DOM
     document.body.appendChild(modal);
     document.body.style.overflow = 'hidden';
-    
-    // Add styles for modal
-    const style = document.createElement('style');
-    style.textContent = `
-        .discord-invite-box {
-            transition: var(--transition);
-        }
-        
-        .discord-invite-box:hover {
-            border-color: #5865f2 !important;
-        }
-    `;
-    
-    if (!document.querySelector('#discord-modal-styles')) {
-        style.id = 'discord-modal-styles';
-        document.head.appendChild(style);
-    }
 }
 
 // Close Discord invite modal
@@ -142,10 +125,6 @@ function closeDiscordInvite() {
 function redirectToDiscord(url) {
     showNotification('Đang chuyển hướng đến Discord... (Mock - trong thực tế sẽ mở link Discord)', 'info');
     
-    // In a real implementation:
-    // window.open(url, '_blank');
-    // closeDiscordInvite();
-    
     // For demo, just close the modal
     setTimeout(() => {
         closeDiscordInvite();
@@ -155,72 +134,79 @@ function redirectToDiscord(url) {
 
 // Initialize Discord chat
 function initDiscordChat() {
-    // Override the getAIResponse function for Discord page
-    window.getAIResponse = function(message) {
-        const lowerMessage = message.toLowerCase();
+    // Thêm extension cho trang Discord
+    const discordResponses = {
+        'tham gia': `
+            <p>Để tham gia Discord STELA SMP:</p>
+            <ol>
+                <li>Nhấn nút "Tham Gia Discord Ngay" trên trang này</li>
+                <li>Chấp nhận lời mời Discord</li>
+                <li>Đọc và đồng ý với quy tắc server</li>
+                <li>Giới thiệu bản thân tại kênh #introductions</li>
+                <li>Bắt đầu trò chuyện và tham gia cộng đồng!</li>
+            </ol>
+            <p>Nếu gặp vấn đề khi tham gia, hãy liên hệ với Admin qua email hoặc Facebook page của STELA SMP.</p>
+        `,
         
-        // Check for Discord related questions
-        if (lowerMessage.includes('tham gia') || lowerMessage.includes('join') || lowerMessage.includes('vào discord')) {
-            return `
-                <p>Để tham gia Discord STELA SMP:</p>
-                <ol>
-                    <li>Nhấn nút "Tham Gia Discord Ngay" trên trang này</li>
-                    <li>Chấp nhận lời mời Discord</li>
-                    <li>Đọc và đồng ý với quy tắc server</li>
-                    <li>Giới thiệu bản thân tại kênh #introductions</li>
-                    <li>Bắt đầu trò chuyện và tham gia cộng đồng!</li>
-                </ol>
-                <p>Nếu gặp vấn đề khi tham gia, hãy liên hệ với Admin qua email hoặc Facebook page của STELA SMP.</p>
-            `;
-        } else if (lowerMessage.includes('support') || lowerMessage.includes('hỗ trợ') || lowerMessage.includes('admin')) {
-            return `
-                <p>Liên hệ hỗ trợ trên Discord:</p>
-                <ul>
-                    <li><strong>Kênh #support-shop:</strong> Cho các vấn đề mua hàng, kích hoạt rank</li>
-                    <li><strong>Admin trực tiếp:</strong> 
-                        <ul>
-                            <li>StelaAdmin (Server Owner)</li>
-                            <li>Mod_Thanh (Head Admin)</li>
-                            <li>Support_Minh (Support Manager)</li>
-                        </ul>
-                    </li>
-                    <li><strong>Thời gian hỗ trợ:</strong> 24/7 (phản hồi trong vòng 5-30 phút)</li>
-                </ul>
-                <p><strong>Lưu ý:</strong> Khi cần hỗ trợ mua hàng, vui lòng gửi ảnh xác nhận thanh toán tại kênh #support-shop và chờ Admin phản hồi. Không spam hoặc tag Admin nhiều lần.</p>
-            `;
-        } else if (lowerMessage.includes('quy tắc') || lowerMessage.includes('rules') || lowerMessage.includes('luật')) {
-            return `
-                <p>Quy tắc quan trọng trên Discord STELA SMP:</p>
-                <ol>
-                    <li>Tôn trọng tất cả thành viên</li>
-                    <li>Không spam hoặc flood chat</li>
-                    <li>Không quảng cáo server khác</li>
-                    <li>Không chia sẻ thông tin cá nhân</li>
-                    <li>Không hack/cheat trong game</li>
-                    <li>Tuân thủ hướng dẫn của Admin</li>
-                    <li>Giao dịch Chợ Đen có trách nhiệm</li>
-                </ol>
-                <p>Vi phạm có thể dẫn đến cảnh cáo, mute, kick hoặc ban. Đọc đầy đủ quy tắc trên trang Discord.</p>
-            `;
-        } else if (lowerMessage.includes('kênh') || lowerMessage.includes('channel') || lowerMessage.includes('phòng')) {
-            return `
-                <p>Các kênh quan trọng trên Discord STELA SMP:</p>
-                <ul>
-                    <li><strong>#announcements:</strong> Thông báo quan trọng từ Admin</li>
-                    <li><strong>#general:</strong> Trò chuyện chung về Minecraft</li>
-                    <li><strong>#support-shop:</strong> Hỗ trợ mua hàng và kích hoạt rank</li>
-                    <li><strong>#black-market:</strong> Trao đổi vật phẩm giữa người chơi</li>
-                    <li><strong>#events:</strong> Thông tin sự kiện và tournament</li>
-                    <li><strong>#showcase:</strong> Chia sẻ thành tựu trong game</li>
-                    <li><strong>#introductions:</strong> Giới thiệu bản thân khi mới tham gia</li>
-                </ul>
-                <p>Vui lòng sử dụng đúng kênh cho từng mục đích thảo luận.</p>
-            `;
-        } else {
-            // Fall back to general responses
-            return `<p>Tôi có thể giúp bạn với thông tin về Discord STELA SMP: cách tham gia, liên hệ support, quy tắc, các kênh quan trọng, v.v. Hãy hỏi tôi cụ thể hơn!</p>`;
-        }
+        'support': `
+            <p>Liên hệ hỗ trợ trên Discord:</p>
+            <ul>
+                <li><strong>Kênh #support-shop:</strong> Cho các vấn đề mua hàng, kích hoạt rank</li>
+                <li><strong>Admin trực tiếp:</strong> 
+                    <ul>
+                        <li>StelaAdmin (Server Owner)</li>
+                        <li>Mod_Thanh (Head Admin)</li>
+                        <li>Support_Minh (Support Manager)</li>
+                    </ul>
+                </li>
+                <li><strong>Thời gian hỗ trợ:</strong> 24/7 (phản hồi trong vòng 5-30 phút)</li>
+            </ul>
+            <p><strong>Lưu ý:</strong> Khi cần hỗ trợ mua hàng, vui lòng gửi ảnh xác nhận thanh toán tại kênh #support-shop và chờ Admin phản hồi. Không spam hoặc tag Admin nhiều lần.</p>
+        `,
+        
+        'quy tắc': `
+            <p>Quy tắc quan trọng trên Discord STELA SMP:</p>
+            <ol>
+                <li>Tôn trọng tất cả thành viên</li>
+                <li>Không spam hoặc flood chat</li>
+                <li>Không quảng cáo server khác</li>
+                <li>Không chia sẻ thông tin cá nhân</li>
+                <li>Không hack/cheat trong game</li>
+                <li>Tuân thủ hướng dẫn của Admin</li>
+                <li>Giao dịch Chợ Đen có trách nhiệm</li>
+            </ol>
+            <p>Vi phạm có thể dẫn đến cảnh cáo, mute, kick hoặc ban. Đọc đầy đủ quy tắc trên trang Discord.</p>
+        `,
+        
+        'kênh': `
+            <p>Các kênh quan trọng trên Discord STELA SMP:</p>
+            <ul>
+                <li><strong>#announcements:</strong> Thông báo quan trọng từ Admin</li>
+                <li><strong>#general:</strong> Trò chuyện chung về Minecraft</li>
+                <li><strong>#support-shop:</strong> Hỗ trợ mua hàng và kích hoạt rank</li>
+                <li><strong>#black-market:</strong> Trao đổi vật phẩm giữa người chơi</li>
+                <li><strong>#events:</strong> Thông tin sự kiện và tournament</li>
+                <li><strong>#showcase:</strong> Chia sẻ thành tựu trong game</li>
+                <li><strong>#introductions:</strong> Giới thiệu bản thân khi mới tham gia</li>
+            </ul>
+            <p>Vui lòng sử dụng đúng kênh cho từng mục đích thảo luận.</p>
+        `
     };
+    
+    // Đăng ký extension với AI Core
+    if (window.stelaAI) {
+        window.stelaAI.addExtension('discord', discordResponses);
+    }
+}
+
+// Sử dụng AI Core cho trang discord
+function getAIResponse(message) {
+    if (window.stelaAI) {
+        return window.stelaAI.processQuestion(message, 'discord');
+    }
+    
+    // Fallback
+    return `<p>Tôi có thể giúp bạn với thông tin về Discord STELA SMP: cách tham gia, liên hệ support, quy tắc, các kênh quan trọng, v.v. Hãy hỏi tôi cụ thể hơn!</p>`;
 }
 
 // Copy IP function
@@ -236,7 +222,132 @@ function copyIP() {
 
 // Show notification
 function showNotification(message, type = 'info') {
-    // Similar implementation as in script.js
-    console.log(`Notification: ${message} (${type})`);
-    alert(message); // Simplified for this example
+    // Remove existing notification
+    const existingNotif = document.querySelector('.notification');
+    if (existingNotif) {
+        existingNotif.remove();
+    }
+    
+    // Create notification element
+    const notification = document.createElement('div');
+    notification.className = `notification ${type}`;
+    notification.innerHTML = `
+        <span>${message}</span>
+        <button class="notification-close">&times;</button>
+    `;
+    
+    // Add to DOM
+    document.body.appendChild(notification);
+    
+    // Auto remove after 5 seconds
+    setTimeout(() => {
+        notification.remove();
+    }, 5000);
+    
+    // Close button functionality
+    notification.querySelector('.notification-close').addEventListener('click', () => {
+        notification.remove();
+    });
+}
+
+// AI Chat functions (sử dụng chung với checkout.js)
+function toggleChat() {
+    const chatBody = document.getElementById('chatBody');
+    const chatToggleIcon = document.getElementById('chatToggleIcon');
+    
+    if (chatBody.style.display === 'none' || chatBody.style.display === '') {
+        chatBody.style.display = 'flex';
+        chatToggleIcon.classList.remove('fa-chevron-down');
+        chatToggleIcon.classList.add('fa-chevron-up');
+    } else {
+        chatBody.style.display = 'none';
+        chatToggleIcon.classList.remove('fa-chevron-up');
+        chatToggleIcon.classList.add('fa-chevron-down');
+    }
+}
+
+function sendMessage() {
+    const input = document.getElementById('chatInput');
+    const message = input.value.trim();
+    
+    if (!message) return;
+    
+    // Add user message
+    addUserMessage(message);
+    
+    // Clear input
+    input.value = '';
+    
+    // Get AI response after delay
+    setTimeout(() => {
+        const response = getAIResponse(message);
+        addAiMessage(response);
+    }, 1000);
+}
+
+function addUserMessage(message) {
+    const chatMessages = document.getElementById('chatMessages');
+    
+    const messageElement = document.createElement('div');
+    messageElement.className = 'ai-message user-message';
+    messageElement.innerHTML = `
+        <div class="ai-avatar user">
+            <i class="fas fa-user"></i>
+        </div>
+        <div class="ai-text user">
+            <p>${message}</p>
+        </div>
+    `;
+    
+    chatMessages.appendChild(messageElement);
+    
+    // Scroll to bottom
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+function addAiMessage(message) {
+    const chatMessages = document.getElementById('chatMessages');
+    
+    const messageElement = document.createElement('div');
+    messageElement.className = 'ai-message';
+    messageElement.innerHTML = `
+        <div class="ai-avatar">
+            <i class="fas fa-robot"></i>
+        </div>
+        <div class="ai-text">
+            ${message}
+        </div>
+    `;
+    
+    chatMessages.appendChild(messageElement);
+    
+    // Scroll to bottom
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+function askQuickQuestion(type) {
+    let question = '';
+    
+    switch(type) {
+        case 'join':
+            question = 'Làm sao tham gia?';
+            break;
+        case 'support':
+            question = 'Liên hệ support?';
+            break;
+        case 'rules':
+            question = 'Quy tắc Discord?';
+            break;
+        default:
+            question = 'Xin chào!';
+    }
+    
+    // Add user message
+    addUserMessage(question);
+    
+    // Get AI response after delay
+    setTimeout(() => {
+        const response = getAIResponse(question);
+        addAiMessage(response);
+    }, 1000);
 }
