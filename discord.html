@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discord | STELA SMP</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="images/logo.png">
+    <style>
+        /* Additional styles for Discord page */
+        .discord-header {
+            text-align: center;
+            padding: 60px 0;
+            background: linear-gradient(135deg, #5865f2, #4752c4);
+            border-radius: var(--border-radius);
+            margin-bottom: 60px;
+            color: white;
+        }
+        
+        .discord-header h1 {
+            color: white;
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .discord-tagline {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+        
+        .discord-cta {
+            margin-top: 30px;
+        }
+        
+        .btn-join-discord {
+            background-color: white;
+            color: #5865f2;
+            font-size: 1.2rem;
+            padding: 16px 40px;
+            border-radius: var(--border-radius);
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn-join-discord:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .discord-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        
+        .discord-stat-card {
+            background-color: var(--dark-gray);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            text-align: center;
+            border: 1px solid var(--medium-gray);
+            transition: var(--transition);
+        }
+        
+        .discord-stat-card:hover {
+            transform: translateY(-5px);
+            border-color: #5865f2;
+        }
+        
+        .discord-stat-icon {
+            font-size: 2.5rem;
+            color: #5865f2;
+            margin-bottom: 20px;
+        }
+        
+        .discord-stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: white;
+        }
+        
+        .discord-stat-label {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+        
+        .discord-channels {
+            margin-bottom: 60px;
+        }
+        
+        .channels-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        .channel-card {
+            background-color: var(--dark-gray);
+            border-radius: var(--border-radius);
+            padding: 25px;
+            border: 1px solid var(--medium-gray);
+            transition: var(--transition);
+        }
+        
+        .channel-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+        
+        .channel-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .channel-icon {
+            font-size: 1.5rem;
+            color: #5865f2;
+        }
+        
+        .channel-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+        
+        .channel-desc {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        
+        .discord-rules {
+            background-color: var(--dark-gray);
+            border-radius: var(--border-radius);
+            padding: 40px;
+            margin-bottom: 60px;
+            border: 1px solid var(--medium-gray);
+        }
+        
+        .rules-list {
+            margin-top: 20px;
+        }
+        
+        .rules-list li {
+            margin-bottom: 15px;
+            padding-left: 10px;
+        }
+        
+        .admin-team {
+            margin-bottom: 60px;
+        }
+        
+        .admin-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .admin-card {
+            background-color: var(--dark-gray);
+            border-radius: var(--border-radius);
+            padding: 25px;
+            text-align: center;
+            border: 1px solid var(--medium-gray);
+            transition: var(--transition);
+        }
+        
+        .admin-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+        }
+        
+        .admin-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #5865f2, #7b2cbf);
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+        
+        .admin-name {
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+        }
+        
+        .admin-role {
+            color: var(--primary-light);
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .admin-desc {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .discord-join-bottom {
+            text-align: center;
+            padding: 60px;
+            background: linear-gradient(135deg, rgba(123, 44, 191, 0.1), rgba(67, 97, 238, 0.1));
+            border-radius: var(--border-radius);
+            border: 1px solid var(--medium-gray);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <img src="images/logo.png" alt="STELA SMP Logo" class="logo">
+                <span class="brand-text">STELA SMP</span>
+            </div>
+            
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link">
+                    <i class="fas fa-store"></i> Store
+                </a>
+                <a href="stats.html" class="nav-link">
+                    <i class="fas fa-chart-bar"></i> Stats
+                </a>
+                <a href="blackmarket.html" class="nav-link">
+                    <i class="fas fa-moon"></i> Chợ Đen
+                </a>
+                <a href="discord.html" class="nav-link active">
+                    <i class="fab fa-discord"></i> Join Discord
+                </a>
+            </div>
+            
+            <div class="nav-actions">
+                <div class="server-info">
+                    <div class="server-ip">
+                        <span class="ip-label">IP:</span>
+                        <code id="server-ip">Stelasmp.online</code>
+                        <button class="copy-btn" onclick="copyIP()">
+                            <i class="far fa-copy"></i>
+                        </button>
+                    </div>
+                    <div class="server-status online">
+                        <span class="status-dot"></span>
+                        Online
+                    </div>
+                </div>
+                <button class="btn-discord" onclick="window.location.href='discord.html'">
+                    <i class="fab fa-discord"></i> Discord
+                </button>
+            </div>
+            
+            <button class="nav-toggle" id="navToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Discord Main Content -->
+    <main class="main-container">
+      <!-- Discord Header -->
+<header class="discord-header">
+    <h1><i class="fab fa-discord"></i> STELA SMP Discord</h1>
+    <p class="discord-tagline">Tham gia cộng đồng Discord của chúng tôi để nhận hỗ trợ, tham gia sự kiện và kết nối với người chơi khác!</p>
+    <div class="discord-cta">
+        <button class="btn-join-discord" onclick="joinDiscord()">
+            <i class="fab fa-discord"></i> Tham Gia Discord Ngay
+        </button>
+    </div>
+</header>
+
+        <!-- Discord Stats -->
+        <section class="discord-stats">
+            <div class="discord-stat-card">
+                <div class="discord-stat-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="discord-stat-number" id="discord-members">1,250+</div>
+                <div class="discord-stat-label">Thành Viên</div>
+            </div>
+            
+            <div class="discord-stat-card">
+                <div class="discord-stat-icon">
+                    <i class="fas fa-comments"></i>
+                </div>
+                <div class="discord-stat-number" id="discord-online">850+</div>
+                <div class="discord-stat-label">Online Hàng Ngày</div>
+            </div>
+            
+            <div class="discord-stat-card">
+                <div class="discord-stat-icon">
+                    <i class="fas fa-headset"></i>
+                </div>
+                <div class="discord-stat-number" id="support-tickets">24/7</div>
+                <div class="discord-stat-label">Hỗ Trợ</div>
+            </div>
+            
+            <div class="discord-stat-card">
+                <div class="discord-stat-icon">
+                    <i class="fas fa-calendar-alt"></i>
+                </div>
+                <div class="discord-stat-number" id="monthly-events">15+</div>
+                <div class="discord-stat-label">Sự Kiện Mỗi Tháng</div>
+            </div>
+        </section>
+
+        <!-- Discord Channels -->
+        <section class="discord-channels">
+            <h2><i class="fas fa-hashtag"></i> Kênh Discord Chính</h2>
+            <p class="section-subtitle">Các kênh quan trọng trong Discord server của chúng tôi</p>
+            
+            <div class="channels-grid">
+                <div class="channel-card">
+                    <div class="channel-header">
+                        <div class="channel-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <h3 class="channel-name">#support-shop</h3>
+                    </div>
+                    <p class="channel-desc">Kênh hỗ trợ mua hàng, kích hoạt rank và giải đáp thắc mắc về store. Gửi ảnh xác nhận thanh toán tại đây.</p>
+                </div>
+                
+                <div class="channel-card">
+                    <div class="channel-header">
+                        <div class="channel-icon">
+                            <i class="fas fa-gamepad"></i>
+                        </div>
+                        <h3 class="channel-name">#general</h3>
+                    </div>
+                    <p class="channel-desc">Trò chuyện chung về Minecraft, chia sẻ kinh nghiệm chơi game và giao lưu với cộng đồng STELA SMP.</p>
+                </div>
+                
+                <div class="channel-card">
+                    <div class="channel-header">
+                        <div class="channel-icon">
+                            <i class="fas fa-bullhorn"></i>
+                        </div>
+                        <h3 class="channel-name">#announcements</h3>
+                    </div>
+                    <p class="channel-desc">Thông báo quan trọng từ Admin, cập nhật server, sự kiện sắp diễn ra và thay đổi về rules.</p>
+                </div>
+                
+                <div class="channel-card">
+                    <div class="channel-header">
+                        <div class="channel-icon">
+                            <i class="fas fa-moon"></i>
+                        </div>
+                        <h3 class="channel-name">#black-market</h3>
+                    </div>
+                    <p class="channel-desc">Trao đổi, mua bán vật phẩm Minecraft giữa người chơi. Đọc rules trước khi tham gia giao dịch.</p>
+                </div>
+                
+                <div class="channel-card">
+                    <div class="channel-header">
+                        <div class="channel-icon">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <h3 class="channel-name">#events</h3>
+                    </div>
+                    <p class="channel-desc">Thông tin về các sự kiện trong server như PvP tournament, building contest, mini-games và giveaways.</p>
+                </div>
+                
+                <div class="channel-card">
+                    <div class="channel-header">
+                        <div class="channel-icon">
+                            <i class="fas fa-images"></i>
+                        </div>
+                        <h3 class="channel-name">#showcase</h3>
+                    </div>
+                    <p class="channel-desc">Chia sẻ thành tựu trong game, base của bạn, redstone contraptions và các công trình sáng tạo.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Discord Rules -->
+        <section class="discord-rules">
+            <h2><i class="fas fa-gavel"></i> Quy Tắc Discord</h2>
+            <p class="section-subtitle">Để đảm bảo trải nghiệm tốt cho mọi người, vui lòng tuân thủ các quy tắc sau:</p>
+            
+            <ol class="rules-list">
+                <li>Tôn trọng tất cả thành viên. Không phân biệt đối xử, quấy rối hoặc sử dụng ngôn từ không phù hợp.</li>
+                <li>Không spam, flood chat hoặc gửi nội dung không liên quan trong các kênh.</li>
+                <li>Không quảng cáo server khác hoặc dịch vụ bên thứ ba mà không được sự cho phép của Admin.</li>
+                <li>Không chia sẻ thông tin cá nhân của người khác hoặc của chính bạn (số điện thoại, địa chỉ, v.v.).</li>
+                <li>Giữ các cuộc thảo luận trong kênh phù hợp. Sử dụng kênh #general cho trò chuyện chung.</li>
+                <li>Không chia sẻ hoặc yêu cầu phần mềm hack, cheat, hoặc bất kỳ công cụ gian lận nào.</li>
+                <li>Tuân thủ hướng dẫn của Admin và Moderator. Quyết định của Admin là cuối cùng.</li>
+                <li>Đối với kênh #black-market, tất cả giao dịch là trách nhiệm của người tham gia. Báo cáo lừa đảo ngay cho Admin.</li>
+                <li>Đối với kênh #support-shop, chỉ gửi ảnh xác nhận thanh toán và chờ Admin phản hồi. Không spam hỏi.</li>
+                <li>Hãy vui vẻ và tận hưởng cộng đồng STELA SMP!</li>
+            </ol>
+            
+            <p><strong>Lưu ý:</strong> Vi phạm quy tắc có thể dẫn đến cảnh cáo, mute, kick hoặc ban khỏi Discord server tùy mức độ.</p>
+        </section>
+
+        <!-- Admin Team -->
+        <section class="admin-team">
+            <h2><i class="fas fa-user-shield"></i> Đội Ngũ Admin & Support</h2>
+            <p class="section-subtitle">Những người điều hành và hỗ trợ STELA SMP</p>
+            
+            <div class="admin-grid">
+                <div class="admin-card">
+                    <div class="admin-avatar">
+                        <i class="fas fa-crown"></i>
+                    </div>
+                    <h3 class="admin-name">StelaAdmin</h3>
+                    <div class="admin-role">Server Owner</div>
+                    <p class="admin-desc">Chủ server, phụ trách quản lý tổng thể và phát triển STELA SMP. Liên hệ cho các vấn đề quan trọng.</p>
+                </div>
+                
+                <div class="admin-card">
+                    <div class="admin-avatar">
+                        <i class="fas fa-user-cog"></i>
+                    </div>
+                    <h3 class="admin-name">Mod_Thanh</h3>
+                    <div class="admin-role">Head Admin</div>
+                    <p class="admin-desc">Quản lý đội ngũ Admin, xử lý các vấn đề kỹ thuật và hỗ trợ người chơi cao cấp.</p>
+                </div>
+                
+                <div class="admin-card">
+                    <div class="admin-avatar">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3 class="admin-name">Support_Minh</h3>
+                    <div class="admin-role">Support Manager</div>
+                    <p class="admin-desc">Phụ trách hỗ trợ mua hàng, kích hoạt rank và giải đáp thắc mắc từ người chơi.</p>
+                </div>
+                
+                <div class="admin-card">
+                    <div class="admin-avatar">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3 class="admin-name">Dev_Huy</h3>
+                    <div class="admin-role">Developer</div>
+                    <p class="admin-desc">Phát triển plugins, custom features và bảo trì hệ thống kỹ thuật của server.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final Join CTA -->
+        <section class="discord-join-bottom">
+            <h2>Sẵn sàng tham gia cộng đồng của chúng tôi?</h2>
+            <p class="section-subtitle">Hơn 1,250 người chơi đang chờ đón bạn trên Discord STELA SMP!</p>
+            <div class="discord-cta">
+                <button class="btn-join-discord" onclick="joinDiscord()">
+                    <i class="fab fa-discord"></i> Tham Gia Discord Ngay
+                </button>
+            </div>
+            <p style="margin-top: 20px; color: var(--text-secondary);">Sau khi tham gia Discord, hãy giới thiệu bản thân tại kênh #introductions!</p>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>STELA SMP</h3>
+                <p>Minecraft Survival Multiplayer Server</p>
+                <div class="server-ip-footer">
+                    <strong>IP:</strong> <code>Stelasmp.online</code>
+                    <button class="copy-btn small" onclick="copyIP()">
+                        <i class="far fa-copy"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Liên Kết Nhanh</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Store</a></li>
+                    <li><a href="stats.html">Stats</a></li>
+                    <li><a href="blackmarket.html">Chợ Đen</a></li>
+                    <li><a href="discord.html">Discord</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Hỗ Trợ</h3>
+                <ul class="footer-links">
+                    <li><a href="#" onclick="openSupportChat()">Chat với AI Support</a></li>
+                    <li><a href="discord.html">Liên hệ Admin</a></li>
+                    <li><a href="#">Hướng dẫn thanh toán</a></li>
+                    <li><a href="#">Câu hỏi thường gặp</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Theo Dõi Chúng Tôi</h3>
+                <div class="social-links">
+                    <a href="discord.html" class="social-link discord">
+                        <i class="fab fa-discord"></i>
+                    </a>
+                    <a href="#" class="social-link youtube">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                    <a href="#" class="social-link tiktok">
+                        <i class="fab fa-tiktok"></i>
+                    </a>
+                    <a href="#" class="social-link facebook">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2026 STELA SMP. Tất cả quyền được bảo lưu. Minecraft là thương hiệu của Mojang AB.</p>
+            <p>Website này không liên kết chính thức với Mojang/Microsoft.</p>
+        </div>
+    </footer>
+
+    <!-- AI Chat Support -->
+    <div class="ai-chat-container" id="aiChatContainer">
+        <div class="ai-chat-header" onclick="toggleChat()">
+            <div class="ai-chat-title">
+                <i class="fas fa-robot"></i>
+                <span>STELA AI Support</span>
+            </div>
+            <div class="ai-chat-toggle">
+                <i class="fas fa-chevron-down" id="chatToggleIcon"></i>
+            </div>
+        </div>
+        <div class="ai-chat-body" id="chatBody">
+            <div class="ai-chat-messages" id="chatMessages">
+                <div class="ai-message">
+                    <div class="ai-avatar">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="ai-text">
+                        <p>Xin chào! Đây là trang Discord của STELA SMP.</p>
+                        <p>Tôi có thể giúp bạn:</p>
+                        <ul>
+                            <li>Tham gia Discord server</li>
+                            <li>Giới thiệu các kênh quan trọng</li>
+                            <li>Giải thích quy tắc Discord</li>
+                            <li>Giới thiệu đội ngũ Admin</li>
+                            <li>Hướng dẫn liên hệ Support</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="ai-chat-input">
+                <input type="text" id="chatInput" placeholder="Nhập câu hỏi của bạn...">
+                <button onclick="sendMessage()">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+            <div class="ai-quick-questions">
+                <button class="quick-question" onclick="askQuickQuestion('join')">Làm sao tham gia?</button>
+                <button class="quick-question" onclick="askQuickQuestion('support')">Liên hệ support?</button>
+                <button class="quick-question" onclick="askQuickQuestion('rules')">Quy tắc Discord?</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="discord.js"></script>
+</body>
+</html>
