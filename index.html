@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STELA SMP | Minecraft Server Store</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="images/logo.png">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <img src="images/logo.png" alt="STELA SMP Logo" class="logo">
+                <span class="brand-text">STELA SMP</span>
+            </div>
+            
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link active">
+                    <i class="fas fa-store"></i> Store
+                </a>
+                <a href="stats.html" class="nav-link">
+                    <i class="fas fa-chart-bar"></i> Stats
+                </a>
+                <a href="blackmarket.html" class="nav-link">
+                    <i class="fas fa-moon"></i> Chợ Đen
+                </a>
+                <a href="discord.html" class="nav-link">
+                    <i class="fab fa-discord"></i> Join Discord
+                </a>
+            </div>
+            
+            <div class="nav-actions">
+                <div class="server-info">
+                    <div class="server-ip">
+                        <span class="ip-label">IP:</span>
+                        <code id="server-ip">Stelasmp.online</code>
+                        <button class="copy-btn" onclick="copyIP()">
+                            <i class="far fa-copy"></i>
+                        </button>
+                    </div>
+                    <div class="server-status online">
+                        <span class="status-dot"></span>
+                        Online
+                    </div>
+                </div>
+                <button class="btn-discord" onclick="window.location.href='discord.html'">
+                    <i class="fab fa-discord"></i> Discord
+                </button>
+            </div>
+            
+            <button class="nav-toggle" id="navToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-container">
+        <!-- Server Header -->
+        <header class="server-header">
+            <div class="server-banner">
+                <h1 class="server-title">STELA SMP</h1>
+                <p class="server-tagline">Minecraft Survival Multiplayer với cộng đồng thân thiện</p>
+                <div class="server-cta">
+                    <button class="btn-primary btn-large" onclick="window.location.href='#rank-packages'">
+                        <i class="fas fa-shopping-cart"></i> Mua Rank Ngay
+                    </button>
+                    <button class="btn-secondary btn-large" onclick="window.location.href='discord.html'">
+                        <i class="fab fa-discord"></i> Tham Gia Discord
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Store Sections -->
+        <section id="rank-packages" class="store-section">
+            <h2 class="section-title">
+                <i class="fas fa-crown"></i> Rank Packages
+            </h2>
+            <p class="section-subtitle">Nâng cấp trải nghiệm chơi game của bạn với các rank đặc biệt</p>
+            
+            <div class="packages-grid">
+                <!-- Rank STELA - 50k -->
+                <div class="package-card">
+                    <div class="package-header">
+                        <h3 class="package-name">STELA</h3>
+                        <div class="package-price">50.000₫</div>
+                    </div>
+                    <div class="package-body">
+                        <ul class="package-features">
+                            <li><i class="fas fa-check"></i> Prefix [STELA] trong game</li>
+                            <li><i class="fas fa-check"></i> Quyền /hat, /sit, /kit stela</li>
+                            <li><i class="fas fa-check"></i> Màu chat vàng</li>
+                            <li><i class="fas fa-check"></i> 3 homes</li>
+                        </ul>
+                        <button class="btn-buy" onclick="openCheckout('STELA', 50000, 'rank')">
+                            Mua Ngay <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Rank STELA+ - 70k -->
+                <div class="package-card">
+                    <div class="package-header">
+                        <h3 class="package-name">STELA+</h3>
+                        <div class="package-price">70.000₫</div>
+                    </div>
+                    <div class="package-body">
+                        <ul class="package-features">
+                            <li><i class="fas fa-check"></i> Tất cả quyền của STELA</li>
+                            <li><i class="fas fa-check"></i> Prefix [STELA+] trong game</li>
+                            <li><i class="fas fa-check"></i> Màu chat xanh ngọc</li>
+                            <li><i class="fas fa-check"></i> 5 homes</li>
+                            <li><i class="fas fa-check"></i> /kit stela+,stela</li>
+                        </ul>
+                        <button class="btn-buy" onclick="openCheckout('STELA+', 70000, 'rank')">
+                            Mua Ngay <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Rank STELA++ - 120k -->
+                <div class="package-card featured">
+                    <div class="package-badge">Phổ Biến</div>
+                    <div class="package-header">
+                        <h3 class="package-name">STELA++</h3>
+                        <div class="package-price">120.000₫</div>
+                    </div>
+                    <div class="package-body">
+                        <ul class="package-features">
+                            <li><i class="fas fa-check"></i> Tất cả quyền của STELA+</li>
+                            <li><i class="fas fa-check"></i> Prefix [STELA++] trong game</li>
+                            <li><i class="fas fa-check"></i> Màu chat đỏ</li>
+                            <li><i class="fas fa-check"></i> 7 homes</li>
+                            <li><i class="fas fa-check"></i> /kit stela++,stela+,stela</li>
+                        </ul>
+                        <button class="btn-buy featured" onclick="openCheckout('STELA++', 120000, 'rank')">
+                            Mua Ngay <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Rank SUPERSTELA+ - 150k -->
+                <div class="package-card">
+                    <div class="package-header">
+                        <h3 class="package-name">SUPERSTELA+</h3>
+                        <div class="package-price">150.000₫</div>
+                    </div>
+                    <div class="package-body">
+                        <ul class="package-features">
+                            <li><i class="fas fa-check"></i> Tất cả quyền của STELA++</li>
+                            <li><i class="fas fa-check"></i> Prefix [SUPERSTELA+] trong game</li>
+                            <li><i class="fas fa-check"></i> Màu chat tím</li>
+                              <li><i class="fas fa-check"></i> /kit SUPERSTELA+,STELA++,STELA</li>
+                        </ul>
+                        <button class="btn-buy" onclick="openCheckout('SUPERSTELA+', 150000, 'rank')">
+                            Mua Ngay <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Rank SUPERSTELA++ - 200k -->
+                <div class="package-card">
+                    <div class="package-header">
+                        <h3 class="package-name">SUPERSTELA++</h3>
+                        <div class="package-price">200.000₫</div>
+                    </div>
+                    <div class="package-body">
+                        <ul class="package-features">
+                            <li><i class="fas fa-check"></i> Tất cả quyền của SUPERSTELA+</li>
+                            <li><i class="fas fa-check"></i> Prefix [SUPERSTELA++] trong game</li>
+                            <li><i class="fas fa-check"></i> Màu chat xanh dương</li>
+                            <li><i class="fas fa-check"></i> /kit SUPERSTELA++,SUPERSTELA+,STELA++,STELA</li>
+                        </ul>
+                        <button class="btn-buy" onclick="openCheckout('SUPERSTELA++', 200000, 'rank')">
+                            Mua Ngay <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Rank KINGSTELA++ - 250k -->
+                <div class="package-card">
+                    <div class="package-header">
+                        <h3 class="package-name">KINGSTELA++</h3>
+                        <div class="package-price">250.000₫</div>
+                    </div>
+                    <div class="package-body">
+                        <ul class="package-features">
+                            <li><i class="fas fa-check"></i> Tất cả quyền của SUPERSTELA++</li>
+                            <li><i class="fas fa-check"></i> Prefix [KINGSTELA++] trong game</li>
+                            <li><i class="fas fa-check"></i> Màu chat cầu vồng</li>
+                            <li><i class="fas fa-check"></i> Nhận key hàng tuần</li>
+                            <li><i class="fas fa-check"></i> Được vote đặc quyền server</li>
+                            <li><i class="fas fa-check"></i> /kit KINGSTELA++,SUPERSTELA++,STELA++,STELA</li>
+                        </ul>
+                        <button class="btn-buy" onclick="openCheckout('KINGSTELA++', 250000, 'rank')">
+                            Mua Ngay <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Custom Rank - 500k -->
+                <div class="package-card custom">
+                    <div class="package-header">
+                        <h3 class="package-name">Custom Rank</h3>
+                        <div class="package-price">500.000₫</div>
+                    </div>
+                    <div class="package-body">
+                        <ul class="package-features">
+                            <li><i class="fas fa-check"></i> Tất cả quyền của KINGSTELA++</li>
+                            <li><i class="fas fa-check"></i> Custom prefix theo yêu cầu</li>
+                            <li><i class="fas fa-check"></i> Custom màu chat</li>
+                            <li><i class="fas fa-check"></i> Nhận 5 keys mỗi tuần</li>
+                            <li><i class="fas fa-check"></i> Priority support 24/7</li>
+                            <li><i class="fas fa-check"></i> /kit Custom Rank và tất cả các rank trước đó</li>
+                        </ul>
+                        <button class="btn-buy custom" onclick="openCheckout('Custom Rank', 500000, 'rank')">
+                            Mua Ngay <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Items/Keys Section -->
+        <section id="items-keys" class="store-section">
+            <h2 class="section-title">
+                <i class="fas fa-key"></i> Keys & Items
+            </h2>
+            <p class="section-subtitle">Mua key để mở rương bí ẩn và vật phẩm đặc biệt</p>
+            
+            <div class="items-grid">
+                <!-- Key Amethyst -->
+                <div class="item-card">
+                    <div class="item-icon">
+                        <i class="fas fa-gem" style="color: #9b59b6;"></i>
+                    </div>
+                    <div class="item-info">
+                        <h3 class="item-name">Key Amethyst</h3>
+                        <div class="item-price">20.000₫</div>
+                        <p class="item-desc">Mở rương Amethyst với đồ hiếm, Gear Amethyst, Cánh, Mace full enchant.</p>
+                    </div>
+                    <button class="btn-buy" onclick="openCheckout('Key Amethyst', 20000, 'key')">
+                        Mua Ngay <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+                
+                <!-- Key Gold -->
+                <div class="item-card">
+                    <div class="item-icon">
+                        <i class="fas fa-coins" style="color: #f1c40f;"></i>
+                    </div>
+                    <div class="item-info">
+                        <h3 class="item-name">Key Gold</h3>
+                        <div class="item-price">10.000₫</div>
+                        <p class="item-desc">Mở rương Gold với vật phẩm giá trị, tools và armor chất lượng cao.</p>
+                    </div>
+                    <button class="btn-buy" onclick="openCheckout('Key Gold', 10000, 'key')">
+                        Mua Ngay <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+                
+                <!-- Key Prime -->
+                <div class="item-card">
+                    <div class="item-icon">
+                        <i class="fas fa-star" style="color: #e74c3c;"></i>
+                    </div>
+                    <div class="item-info">
+                        <h3 class="item-name">Key Prime</h3>
+                        <div class="item-price">10.000₫</div>
+                        <p class="item-desc">Mở rương Prime với vật phẩm độc quyền, Gear Prime.</p>
+                    </div>
+                    <button class="btn-buy" onclick="openCheckout('Key Prime', 10000, 'key')">
+                        Mua Ngay <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+                
+                <!-- Key Crimson -->
+                <div class="item-card">
+                    <div class="item-icon">
+                        <i class="fas fa-fire" style="color: #e74c3c;"></i>
+                    </div>
+                    <div class="item-info">
+                        <h3 class="item-name">Key Crimson</h3>
+                        <div class="item-price">20.000₫</div>
+                        <p class="item-desc">Mở rương Crimson với vật phẩm mạnh nhất, netherite gear và boss drops.</p>
+                    </div>
+                    <button class="btn-buy" onclick="openCheckout('Key Crimson', 20000, 'key')">
+                        Mua Ngay <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+                
+                <!-- Quyền FLY -->
+                <div class="item-card">
+                    <div class="item-icon">
+                        <i class="fas fa-feather-alt" style="color: #3498db;"></i>
+                    </div>
+                    <div class="item-info">
+                        <h3 class="item-name">Quyền FLY</h3>
+                        <div class="item-price">100.000₫</div>
+                        <p class="item-desc">Quyền bay (/fly) vĩnh viễn ở tất cả các thế giới (Survival).</p>
+                    </div>
+                    <button class="btn-buy" onclick="openCheckout('Quyền FLY', 100000, 'permission')">
+                        Mua Ngay <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Server -->
+        <section class="info-section">
+            <h2 class="section-title">
+                <i class="fas fa-server"></i> Về STELA SMP
+            </h2>
+            <div class="about-grid">
+                <div class="about-card">
+                    <div class="about-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Cộng Đồng Thân Thiện</h3>
+                    <p>Hơn 500 thành viên tích cực, luôn sẵn sàng giúp đỡ và chơi cùng nhau.</p>
+                </div>
+                <div class="about-card">
+                    <div class="about-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Bảo Mật Cao</h3>
+                    <p>Anti-cheat mạnh mẽ, bảo vệ tài khoản và chống grief hiệu quả.</p>
+                </div>
+                <div class="about-card">
+                    <div class="about-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3>Hiệu Suất Ổn Định</h3>
+                    <p>Server hosted trên hardware mạnh, uptime 99%, lag-free experience.</p>
+                </div>
+                <div class="about-card">
+                    <div class="about-icon">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                    <h3>Nhiều Tính Năng</h3>
+                    <p>Custom plugins, minigames, economy system và events hàng tuần.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>STELA SMP</h3>
+                <p>Minecraft Survival Multiplayer Server</p>
+                <div class="server-ip-footer">
+                    <strong>IP:</strong> <code>Stelasmp.online</code>
+                    <button class="copy-btn small" onclick="copyIP()">
+                        <i class="far fa-copy"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Liên Kết Nhanh</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Store</a></li>
+                    <li><a href="stats.html">Stats</a></li>
+                    <li><a href="blackmarket.html">Chợ Đen</a></li>
+                    <li><a href="discord.html">Discord</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Hỗ Trợ</h3>
+                <ul class="footer-links">
+                    <li><a href="#" onclick="openSupportChat()">Chat với AI Support</a></li>
+                    <li><a href="discord.html">Liên hệ Admin</a></li>
+                    <li><a href="#">Hướng dẫn thanh toán</a></li>
+                    <li><a href="#">Câu hỏi thường gặp</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Theo Dõi Chúng Tôi</h3>
+                <div class="social-links">
+                    <a href="discord.html" class="social-link discord">
+                        <i class="fab fa-discord"></i>
+                    </a>
+                    <a href="#" class="social-link youtube">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                    <a href="#" class="social-link tiktok">
+                        <i class="fab fa-tiktok"></i>
+                    </a>
+                    <a href="#" class="social-link facebook">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2026 STELA SMP. Tất cả quyền được bảo lưu. Minecraft là thương hiệu của Mojang AB.</p>
+            <p>Website này không liên kết chính thức với Mojang/Microsoft.</p>
+        </div>
+    </footer>
+
+    <!-- Checkout Modal -->
+    <div id="checkoutModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Thanh Toán</h2>
+                <button class="modal-close" onclick="closeCheckout()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="checkout-summary">
+                    <h3>Thông tin đơn hàng</h3>
+                    <div class="order-details">
+                        <div class="order-item">
+                            <span id="checkout-item-name">STELA++</span>
+                            <span id="checkout-item-price">120.000₫</span>
+                        </div>
+                        <div class="order-total">
+                            <strong>Tổng cộng:</strong>
+                            <strong id="checkout-total">120.000₫</strong>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="payment-methods">
+                    <h3>Chọn phương thức thanh toán</h3>
+                    <div class="methods-grid">
+                        <div class="method-card selected" onclick="selectPayment('momo')">
+                            <div class="method-icon">
+                                <i class="fas fa-money-bill-wave"></i>
+                            </div>
+                            <div class="method-info">
+                                <h4>MoMo</h4>
+                                <p>Chuyển khoản qua ví MoMo</p>
+                            </div>
+                            <div class="method-check">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="method-card" onclick="selectPayment('bank')">
+                            <div class="method-icon">
+                                <i class="fas fa-university"></i>
+                            </div>
+                            <div class="method-info">
+                                <h4>Chuyển khoản ngân hàng</h4>
+                                <p>Chuyển khoản qua Internet Banking</p>
+                            </div>
+                            <div class="method-check">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="method-card" onclick="selectPayment('qr')">
+                            <div class="method-icon">
+                                <i class="fas fa-qrcode"></i>
+                            </div>
+                            <div class="method-info">
+                                <h4>QR Code</h4>
+                                <p>Quét mã QR để thanh toán</p>
+                            </div>
+                            <div class="method-check">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="payment-details" id="momo-details">
+                    <h3>Hướng dẫn thanh toán MoMo</h3>
+                    <ol class="payment-steps">
+                        <li>Mở ứng dụng MoMo trên điện thoại</li>
+                        <li>Chọn "Chuyển tiền" hoặc "Thanh toán"</li>
+                        <li>Nhập số điện thoại: <strong>0909 123 456</strong></li>
+                        <li>Nhập số tiền: <strong id="momo-amount">120.000₫</strong></li>
+                        <li>Nội dung chuyển khoản: <strong id="momo-content">STELASMP_STELA++</strong></li>
+                        <li>Hoàn tất giao dịch và chụp màn hình xác nhận</li>
+                    </ol>
+                    <div class="payment-note">
+                        <p><strong>Lưu ý:</strong> Sau khi chuyển khoản, vui lòng tham gia Discord và gửi ảnh xác nhận cho Admin để được kích hoạt rank trong vòng 5-15 phút.</p>
+                    </div>
+                </div>
+                
+                <div class="payment-details" id="bank-details" style="display: none;">
+                    <h3>Hướng dẫn chuyển khoản ngân hàng</h3>
+                    <div class="bank-info">
+                        <p><strong>Ngân hàng:</strong> Vietcombank</p>
+                        <p><strong>Số tài khoản:</strong> 1234567890</p>
+                        <p><strong>Chủ tài khoản:</strong> NGUYEN VAN A</p>
+                        <p><strong>Số tiền:</strong> <strong id="bank-amount">120.000₫</strong></p>
+                        <p><strong>Nội dung chuyển khoản:</strong> <strong id="bank-content">STELASMP_STELA++</strong></p>
+                    </div>
+                    <div class="payment-note">
+                        <p><strong>Lưu ý:</strong> Sau khi chuyển khoản, vui lòng tham gia Discord và gửi ảnh xác nhận cho Admin để được kích hoạt rank trong vòng 5-15 phút.</p>
+                    </div>
+                </div>
+                
+                <div class="payment-details" id="qr-details" style="display: none;">
+                    <h3>Quét mã QR để thanh toán</h3>
+                    <div class="qr-container">
+                        <div class="qr-code">
+                            <!-- Mock QR code -->
+                            <div class="qr-mock">
+                                <div class="qr-pattern"></div>
+                                <div class="qr-text">QR Code Mockup</div>
+                            </div>
+                        </div>
+                        <div class="qr-info">
+                            <p><strong>Số tiền:</strong> <strong id="qr-amount">120.000₫</strong></p>
+                            <p><strong>Nội dung:</strong> <strong id="qr-content">STELASMP_STELA++</strong></p>
+                            <p><strong>Hướng dẫn:</strong> Mở ứng dụng ngân hàng hoặc ví điện tử, quét mã QR và hoàn tất thanh toán.</p>
+                        </div>
+                    </div>
+                    <div class="payment-note">
+                        <p><strong>Lưu ý:</strong> Sau khi thanh toán, vui lòng tham gia Discord và gửi ảnh xác nhận cho Admin để được kích hoạt rank trong vòng 5-15 phút.</p>
+                    </div>
+                </div>
+                
+                <div class="payment-confirmation">
+                    <h3>Xác nhận thanh toán</h3>
+                    <p>Sau khi đã thanh toán, vui lòng tham gia Discord và liên hệ với Admin để được kích hoạt:</p>
+                    <button class="btn-discord large" onclick="window.location.href='discord.html'">
+                        <i class="fab fa-discord"></i> Tham Gia Discord Ngay
+                    </button>
+                    <p class="support-note">Nếu gặp vấn đề, hãy liên hệ với Support qua Discord hoặc chat với AI Support bên dưới.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- AI Chat Support -->
+    <div class="ai-chat-container" id="aiChatContainer">
+        <div class="ai-chat-header" onclick="toggleChat()">
+            <div class="ai-chat-title">
+                <i class="fas fa-robot"></i>
+                <span>STELA AI Support</span>
+            </div>
+            <div class="ai-chat-toggle">
+                <i class="fas fa-chevron-down" id="chatToggleIcon"></i>
+            </div>
+        </div>
+        <div class="ai-chat-body" id="chatBody">
+            <div class="ai-chat-messages" id="chatMessages">
+                <div class="ai-message">
+                    <div class="ai-avatar">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="ai-text">
+                        <p>Xin chào! Tôi là STELA AI Support. Tôi có thể giúp gì cho bạn?</p>
+                        <p>Bạn có thể hỏi tôi về:</p>
+                        <ul>
+                            <li>Giá các rank và items</li>
+                            <li>Cách mua hàng và thanh toán</li>
+                            <li>Hướng dẫn vào server</li>
+                            <li>Và nhiều thông tin khác về STELA SMP</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="ai-chat-input">
+                <input type="text" id="chatInput" placeholder="Nhập câu hỏi của bạn...">
+                <button onclick="sendMessage()">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+            <div class="ai-quick-questions">
+                <button class="quick-question" onclick="askQuickQuestion('rank')">Giá các rank?</button>
+                <button class="quick-question" onclick="askQuickQuestion('payment')">Cách thanh toán?</button>
+                <button class="quick-question" onclick="askQuickQuestion('join')">Vào server thế nào?</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="checkout.js"></script>
+</body>
+</html>
