@@ -176,62 +176,69 @@ function escapeHtml(text) {
 
 // Initialize black market chat
 function initBlackMarketChat() {
-    // Override the getAIResponse function for black market page
-    window.getAIResponse = function(message) {
-        const lowerMessage = message.toLowerCase();
+    // Thêm extension cho trang Black Market
+    const blackMarketResponses = {
+        'đăng bán': `
+            <p>Để đăng bán vật phẩm trên Chợ Đen:</p>
+            <ol>
+                <li>Điền đầy đủ thông tin vào form "Đăng bán vật phẩm"</li>
+                <li>Nhấn "Đăng bán ngay"</li>
+                <li>Vật phẩm của bạn sẽ xuất hiện trong danh sách</li>
+                <li>Người mua sẽ liên hệ với bạn qua Discord</li>
+            </ol>
+            <p><strong>Lưu ý:</strong> STELA SMP không chịu trách nhiệm cho các giao dịch giữa người chơi. Hãy cẩn thận và chỉ giao dịch với người đáng tin cậy.</p>
+        `,
         
-        // Check for black market related questions
-        if (lowerMessage.includes('đăng bán') || lowerMessage.includes('bán đồ') || lowerMessage.includes('post')) {
-            return `
-                <p>Để đăng bán vật phẩm trên Chợ Đen:</p>
-                <ol>
-                    <li>Điền đầy đủ thông tin vào form "Đăng bán vật phẩm"</li>
-                    <li>Nhấn "Đăng bán ngay"</li>
-                    <li>Vật phẩm của bạn sẽ xuất hiện trong danh sách</li>
-                    <li>Người mua sẽ liên hệ với bạn qua Discord</li>
-                </ol>
-                <p><strong>Lưu ý:</strong> STELA SMP không chịu trách nhiệm cho các giao dịch giữa người chơi. Hãy cẩn thận và chỉ giao dịch với người đáng tin cậy.</p>
-            `;
-        } else if (lowerMessage.includes('an toàn') || lowerMessage.includes('lừa đảo') || lowerMessage.includes('scam')) {
-            return `
-                <p>Để giao dịch an toàn trên Chợ Đen:</p>
-                <ul>
-                    <li>Chỉ giao dịch với người chơi có uy tín</li>
-                    <li>Kiểm tra vật phẩm trước khi thanh toán</li>
-                    <li>Sử dụng hệ thống escrow nếu giá trị lớn</li>
-                    <li>Luôn giữ lại bằng chứng giao dịch (chat log, ảnh chụp)</li>
-                    <li>Báo cáo ngay cho Admin nếu bị lừa đảo</li>
-                </ul>
-                <p><strong>Quan trọng:</strong> Admin có thể ban người chơi lừa đảo nhưng không thể hoàn lại vật phẩm/tài sản đã mất.</p>
-            `;
-        } else if (lowerMessage.includes('báo cáo') || lowerMessage.includes('report') || lowerMessage.includes('lừa')) {
-            return `
-                <p>Nếu bạn bị lừa đảo trên Chợ Đen:</p>
-                <ol>
-                    <li>Chụp ảnh toàn bộ quá trình giao dịch (chat, thỏa thuận)</li>
-                    <li>Vào Discord server và liên hệ với Admin</li>
-                    <li>Cung cấp đầy đủ bằng chứng</li>
-                    <li>Admin sẽ xử lý người chơi lừa đảo (ban khỏi server)</li>
-                </ol>
-                <p><strong>Lưu ý:</strong> Admin không thể hoàn lại vật phẩm/tài sản đã mất. Mục đích chính là trừng phạt người lừa đảo để bảo vệ cộng đồng.</p>
-            `;
-        } else if (lowerMessage.includes('mua') || lowerMessage.includes('tìm đồ')) {
-            return `
-                <p>Để mua vật phẩm trên Chợ Đen:</p>
-                <ol>
-                    <li>Duyệt danh sách vật phẩm đang bán</li>
-                    <li>Chọn vật phẩm bạn muốn mua</li>
-                    <li>Nhấn "Liên hệ" để lấy Discord của người bán</li>
-                    <li>Thương lượng giá và phương thức giao dịch</li>
-                    <li>Hoàn tất giao dịch trong game</li>
-                </ol>
-                <p>Nếu không tìm thấy vật phẩm bạn cần, hãy đăng yêu cầu mua trên kênh #black-market trong Discord server.</p>
-            `;
-        } else {
-            // Fall back to general responses
-            return `<p>Tôi có thể giúp bạn với thông tin về Chợ Đen: cách đăng bán, mua an toàn, báo cáo lừa đảo, v.v. Hãy hỏi tôi cụ thể hơn!</p>`;
-        }
+        'an toàn': `
+            <p>Để giao dịch an toàn trên Chợ Đen:</p>
+            <ul>
+                <li>Chỉ giao dịch với người chơi có uy tín</li>
+                <li>Kiểm tra vật phẩm trước khi thanh toán</li>
+                <li>Sử dụng hệ thống escrow nếu giá trị lớn</li>
+                <li>Luôn giữ lại bằng chứng giao dịch (chat log, ảnh chụp)</li>
+                <li>Báo cáo ngay cho Admin nếu bị lừa đảo</li>
+            </ul>
+            <p><strong>Quan trọng:</strong> Admin có thể ban người chơi lừa đảo nhưng không thể hoàn lại vật phẩm/tài sản đã mất.</p>
+        `,
+        
+        'báo cáo': `
+            <p>Nếu bạn bị lừa đảo trên Chợ Đen:</p>
+            <ol>
+                <li>Chụp ảnh toàn bộ quá trình giao dịch (chat, thỏa thuận)</li>
+                <li>Vào Discord server và liên hệ với Admin</li>
+                <li>Cung cấp đầy đủ bằng chứng</li>
+                <li>Admin sẽ xử lý người chơi lừa đảo (ban khỏi server)</li>
+            </ol>
+            <p><strong>Lưu ý:</strong> Admin không thể hoàn lại vật phẩm/tài sản đã mất. Mục đích chính là trừng phạt người lừa đảo để bảo vệ cộng đồng.</p>
+        `,
+        
+        'mua': `
+            <p>Để mua vật phẩm trên Chợ Đen:</p>
+            <ol>
+                <li>Duyệt danh sách vật phẩm đang bán</li>
+                <li>Chọn vật phẩm bạn muốn mua</li>
+                <li>Nhấn "Liên hệ" để lấy Discord của người bán</li>
+                <li>Thương lượng giá và phương thức giao dịch</li>
+                <li>Hoàn tất giao dịch trong game</li>
+            </ol>
+            <p>Nếu không tìm thấy vật phẩm bạn cần, hãy đăng yêu cầu mua trên kênh #black-market trong Discord server.</p>
+        `
     };
+    
+    // Đăng ký extension với AI Core
+    if (window.stelaAI) {
+        window.stelaAI.addExtension('blackmarket', blackMarketResponses);
+    }
+}
+
+// Sử dụng AI Core cho trang blackmarket
+function getAIResponse(message) {
+    if (window.stelaAI) {
+        return window.stelaAI.processQuestion(message, 'blackmarket');
+    }
+    
+    // Fallback
+    return `<p>Tôi có thể giúp bạn với thông tin về Chợ Đen: cách đăng bán, mua an toàn, báo cáo lừa đảo, v.v. Hãy hỏi tôi cụ thể hơn!</p>`;
 }
 
 // Copy IP function
@@ -247,7 +254,132 @@ function copyIP() {
 
 // Show notification
 function showNotification(message, type = 'info') {
-    // Similar implementation as in script.js
-    console.log(`Notification: ${message} (${type})`);
-    alert(message); // Simplified for this example
+    // Remove existing notification
+    const existingNotif = document.querySelector('.notification');
+    if (existingNotif) {
+        existingNotif.remove();
+    }
+    
+    // Create notification element
+    const notification = document.createElement('div');
+    notification.className = `notification ${type}`;
+    notification.innerHTML = `
+        <span>${message}</span>
+        <button class="notification-close">&times;</button>
+    `;
+    
+    // Add to DOM
+    document.body.appendChild(notification);
+    
+    // Auto remove after 5 seconds
+    setTimeout(() => {
+        notification.remove();
+    }, 5000);
+    
+    // Close button functionality
+    notification.querySelector('.notification-close').addEventListener('click', () => {
+        notification.remove();
+    });
+}
+
+// AI Chat functions (sử dụng chung với checkout.js)
+function toggleChat() {
+    const chatBody = document.getElementById('chatBody');
+    const chatToggleIcon = document.getElementById('chatToggleIcon');
+    
+    if (chatBody.style.display === 'none' || chatBody.style.display === '') {
+        chatBody.style.display = 'flex';
+        chatToggleIcon.classList.remove('fa-chevron-down');
+        chatToggleIcon.classList.add('fa-chevron-up');
+    } else {
+        chatBody.style.display = 'none';
+        chatToggleIcon.classList.remove('fa-chevron-up');
+        chatToggleIcon.classList.add('fa-chevron-down');
+    }
+}
+
+function sendMessage() {
+    const input = document.getElementById('chatInput');
+    const message = input.value.trim();
+    
+    if (!message) return;
+    
+    // Add user message
+    addUserMessage(message);
+    
+    // Clear input
+    input.value = '';
+    
+    // Get AI response after delay
+    setTimeout(() => {
+        const response = getAIResponse(message);
+        addAiMessage(response);
+    }, 1000);
+}
+
+function addUserMessage(message) {
+    const chatMessages = document.getElementById('chatMessages');
+    
+    const messageElement = document.createElement('div');
+    messageElement.className = 'ai-message user-message';
+    messageElement.innerHTML = `
+        <div class="ai-avatar user">
+            <i class="fas fa-user"></i>
+        </div>
+        <div class="ai-text user">
+            <p>${message}</p>
+        </div>
+    `;
+    
+    chatMessages.appendChild(messageElement);
+    
+    // Scroll to bottom
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+function addAiMessage(message) {
+    const chatMessages = document.getElementById('chatMessages');
+    
+    const messageElement = document.createElement('div');
+    messageElement.className = 'ai-message';
+    messageElement.innerHTML = `
+        <div class="ai-avatar">
+            <i class="fas fa-robot"></i>
+        </div>
+        <div class="ai-text">
+            ${message}
+        </div>
+    `;
+    
+    chatMessages.appendChild(messageElement);
+    
+    // Scroll to bottom
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+function askQuickQuestion(type) {
+    let question = '';
+    
+    switch(type) {
+        case 'post':
+            question = 'Cách đăng bán?';
+            break;
+        case 'safety':
+            question = 'Làm sao an toàn?';
+            break;
+        case 'report':
+            question = 'Báo cáo lừa đảo?';
+            break;
+        default:
+            question = 'Xin chào!';
+    }
+    
+    // Add user message
+    addUserMessage(question);
+    
+    // Get AI response after delay
+    setTimeout(() => {
+        const response = getAIResponse(question);
+        addAiMessage(response);
+    }, 1000);
 }
