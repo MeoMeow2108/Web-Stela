@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stats | STELA SMP</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="images/logo.png">
+</head>
+<body>
+    <!-- Navbar (same as index.html) -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <img src="images/logo.png" alt="STELA SMP Logo" class="logo">
+                <span class="brand-text">STELA SMP</span>
+            </div>
+            
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link">
+                    <i class="fas fa-store"></i> Store
+                </a>
+                <a href="stats.html" class="nav-link active">
+                    <i class="fas fa-chart-bar"></i> Stats
+                </a>
+                <a href="blackmarket.html" class="nav-link">
+                    <i class="fas fa-moon"></i> Chợ Đen
+                </a>
+                <a href="discord.html" class="nav-link">
+                    <i class="fab fa-discord"></i> Join Discord
+                </a>
+            </div>
+            
+            <div class="nav-actions">
+                <div class="server-info">
+                    <div class="server-ip">
+                        <span class="ip-label">IP:</span>
+                        <code id="server-ip">Stelasmp.online</code>
+                        <button class="copy-btn" onclick="copyIP()">
+                            <i class="far fa-copy"></i>
+                        </button>
+                    </div>
+                    <div class="server-status online">
+                        <span class="status-dot"></span>
+                        Online
+                    </div>
+                </div>
+                <button class="btn-discord" onclick="window.location.href='discord.html'">
+                    <i class="fab fa-discord"></i> Discord
+                </button>
+            </div>
+            
+            <button class="nav-toggle" id="navToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Stats Main Content -->
+    <main class="main-container">
+        <header class="stats-header">
+            <h1><i class="fas fa-chart-bar"></i> Server Statistics</h1>
+            <p class="stats-subtitle">Thống kê và số liệu về STELA SMP</p>
+        </header>
+
+        <!-- Stats Dashboard -->
+        <section class="stats-dashboard">
+            <div class="stats-grid">
+                <!-- Total Players -->
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Tổng Người Chơi</h3>
+                        <div class="stat-number" id="total-players">1,247</div>
+                        <div class="stat-change positive">
+                            <i class="fas fa-arrow-up"></i> 12% so với tháng trước
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Online Now -->
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-signal"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Đang Online</h3>
+                        <div class="stat-number" id="online-now">84</div>
+                        <div class="stat-trend">
+                            <span class="online-dot"></span> Đang hoạt động
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Total Transactions -->
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Tổng Giao Dịch</h3>
+                        <div class="stat-number" id="total-transactions">892</div>
+                        <div class="stat-change positive">
+                            <i class="fas fa-arrow-up"></i> 8% so với tháng trước
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Revenue -->
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-money-bill-wave"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Doanh Thu (30 ngày)</h3>
+                        <div class="stat-number" id="monthly-revenue">24.5M ₫</div>
+                        <div class="stat-change positive">
+                            <i class="fas fa-arrow-up"></i> 15% so với tháng trước
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Top Players -->
+        <section class="stats-section">
+            <h2><i class="fas fa-trophy"></i> Top Players</h2>
+            <p class="section-subtitle">Những người chơi hàng đầu trên STELA SMP</p>
+            
+            <div class="top-players">
+                <div class="player-card top-1">
+                    <div class="player-rank">1</div>
+                    <div class="player-avatar">
+                        <i class="fas fa-crown"></i>
+                    </div>
+                    <div class="player-info">
+                        <h3 class="player-name">HanMeoMeoz</h3>
+                        <div class="player-stats">
+                            <span><i class="fas fa-clock"></i> 420 giờ</span>
+                            <span><i class="fas fa-coins"></i> 5.2M</span>
+                        </div>
+                    </div>
+                    <div class="player-badges">
+                        <span class="badge admin">Admin</span>
+                        <span class="badge top">Top 1</span>
+                    </div>
+                </div>
+                
+                <div class="player-card top-2">
+                    <div class="player-rank">2</div>
+                    <div class="player-avatar">
+                        <i class="fas fa-chess-queen"></i>
+                    </div>
+                    <div class="player-info">
+                        <h3 class="player-name"></h3>
+                        <div class="player-stats">
+                            <span><i class="fas fa-clock"></i> </span>
+                            <span><i class="fas fa-coins"></i> </span>
+                        </div>
+                    </div>
+                    <div class="player-badges">
+                        <span class="badge vip"></span>
+                        <span class="badge top">Top 2</span>
+                    </div>
+                </div>
+                
+                <div class="player-card top-3">
+                    <div class="player-rank">3</div>
+                    <div class="player-avatar">
+                        <i class="fas fa-chess-knight"></i>
+                    </div>
+                    <div class="player-info">
+                        <h3 class="player-name"></h3>
+                        <div class="player-stats">
+                            <span><i class="fas fa-clock"></i> </span>
+                            <span><i class="fas fa-coins"></i> </span>
+                        </div>
+                    </div>
+                    <div class="player-badges">
+                        <span class="badge vip">VIP+</span>
+                        <span class="badge top">Top 3</span>
+                    </div>
+                </div>
+                
+                <!-- Other top players -->
+                <div class="players-list">
+                    <div class="player-row">
+                        <div class="player-rank-small"></div>
+                        <div class="player-name-small"></div>
+                        <div class="player-hours"></div>
+                        <div class="player-balance"></div>
+                    </div>
+                    
+                    <div class="player-row">
+                        <div class="player-rank-small"></div>
+                        <div class="player-name-small"></div>
+                        <div class="player-hours"></div>
+                        <div class="player-balance"></div>
+                    </div>
+                    
+                    <div class="player-row">
+                        <div class="player-rank-small"></div>
+                        <div class="player-name-small"></div>
+                        <div class="player-hours"></div>
+                        <div class="player-balance"></div>
+                    </div>
+                    
+                    <div class="player-row">
+                        <div class="player-rank-small"></div>
+                        <div class="player-name-small"></div>
+                        <div class="player-hours"></div>
+                        <div class="player-balance"></div>
+                    </div>
+                    
+                    <div class="player-row">
+                        <div class="player-rank-small"></div>
+                        <div class="player-name-small"></div>
+                        <div class="player-hours"></div>
+                        <div class="player-balance"></div>
+                    </div>
+                    
+                   div class="player-row">
+                        <div class="player-rank-small"></div>
+                        <div class="player-name-small"></div>
+                        <div class="player-hours"></div>
+                        <div class="player-balance"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Server Activity -->
+        <section class="stats-section">
+            <h2><i class="fas fa-chart-line"></i> Hoạt Động Server</h2>
+            <p class="section-subtitle">Biểu đồ hoạt động trong 7 ngày qua</p>
+            
+            <div class="activity-chart">
+                <div class="chart-container">
+                    <canvas id="activityChart" width="400" height="200"></canvas>
+                </div>
+                <div class="chart-legend">
+                    <div class="legend-item">
+                        <span class="legend-color" style="background-color: #7b2cbf;"></span>
+                        <span>Người chơi online</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color" style="background-color: #06d6a0;"></span>
+                        <span>Giao dịch thành công</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Popular Items -->
+        <section class="stats-section">
+            <h2><i class="fas fa-fire"></i> Sản Phẩm Phổ Biến</h2>
+            <p class="section-subtitle">Các rank và items được mua nhiều nhất</p>
+            
+            <div class="popular-items">
+                <div class="popular-item">
+                    <div class="item-rank">1</div>
+                    <div class="item-name">STELA++</div>
+                    <div class="item-sales">128 lượt mua</div>
+                    <div class="item-bar">
+                        <div class="bar-fill" style="width: 100%"></div>
+                    </div>
+                </div>
+                
+                <div class="popular-item">
+                    <div class="item-rank">2</div>
+                    <div class="item-name">STELA+</div>
+                    <div class="item-sales">95 lượt mua</div>
+                    <div class="item-bar">
+                        <div class="bar-fill" style="width: 74%"></div>
+                    </div>
+                </div>
+                
+                <div class="popular-item">
+                    <div class="item-rank">3</div>
+                    <div class="item-name">Quyền FLY</div>
+                    <div class="item-sales">87 lượt mua</div>
+                    <div class="item-bar">
+                        <div class="bar-fill" style="width: 68%"></div>
+                    </div>
+                </div>
+                
+                <div class="popular-item">
+                    <div class="item-rank">4</div>
+                    <div class="item-name">Key Amethyst</div>
+                    <div class="item-sales">76 lượt mua</div>
+                    <div class="item-bar">
+                        <div class="bar-fill" style="width: 59%"></div>
+                    </div>
+                </div>
+                
+                <div class="popular-item">
+                    <div class="item-rank">5</div>
+                    <div class="item-name">SUPERSTELA+</div>
+                    <div class="item-sales">64 lượt mua</div>
+                    <div class="item-bar">
+                        <div class="bar-fill" style="width: 50%"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer (same as index.html) -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>STELA SMP</h3>
+                <p>Minecraft Survival Multiplayer Server</p>
+                <div class="server-ip-footer">
+                    <strong>IP:</strong> <code>Stelasmp.online</code>
+                    <button class="copy-btn small" onclick="copyIP()">
+                        <i class="far fa-copy"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Liên Kết Nhanh</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Store</a></li>
+                    <li><a href="stats.html">Stats</a></li>
+                    <li><a href="blackmarket.html">Chợ Đen</a></li>
+                    <li><a href="discord.html">Discord</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Hỗ Trợ</h3>
+                <ul class="footer-links">
+                    <li><a href="#" onclick="openSupportChat()">Chat với AI Support</a></li>
+                    <li><a href="discord.html">Liên hệ Admin</a></li>
+                    <li><a href="#">Hướng dẫn thanh toán</a></li>
+                    <li><a href="#">Câu hỏi thường gặp</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Theo Dõi Chúng Tôi</h3>
+                <div class="social-links">
+                    <a href="discord.html" class="social-link discord">
+                        <i class="fab fa-discord"></i>
+                    </a>
+                    <a href="#" class="social-link youtube">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                    <a href="#" class="social-link tiktok">
+                        <i class="fab fa-tiktok"></i>
+                    </a>
+                    <a href="#" class="social-link facebook">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2026 STELA SMP. Tất cả quyền được bảo lưu. Minecraft là thương hiệu của Mojang AB.</p>
+            <p>Website này không liên kết chính thức với Mojang/Microsoft.</p>
+        </div>
+    </footer>
+
+    <!-- AI Chat Support (same as index.html) -->
+    <div class="ai-chat-container" id="aiChatContainer">
+        <div class="ai-chat-header" onclick="toggleChat()">
+            <div class="ai-chat-title">
+                <i class="fas fa-robot"></i>
+                <span>STELA AI Support</span>
+            </div>
+            <div class="ai-chat-toggle">
+                <i class="fas fa-chevron-down" id="chatToggleIcon"></i>
+            </div>
+        </div>
+        <div class="ai-chat-body" id="chatBody">
+            <div class="ai-chat-messages" id="chatMessages">
+                <div class="ai-message">
+                    <div class="ai-avatar">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="ai-text">
+                        <p>Xin chào! Tôi là STELA AI Support. Tôi có thể giúp gì cho bạn?</p>
+                        <p>Bạn có thể hỏi tôi về:</p>
+                        <ul>
+                            <li>Thống kê server</li>
+                            <li>Top người chơi</li>
+                            <li>Sản phẩm phổ biến</li>
+                            <li>Và nhiều thông tin khác về STELA SMP</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="ai-chat-input">
+                <input type="text" id="chatInput" placeholder="Nhập câu hỏi của bạn...">
+                <button onclick="sendMessage()">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+            <div class="ai-quick-questions">
+                <button class="quick-question" onclick="askQuickQuestion('top')">Ai là top 1?</button>
+                <button class="quick-question" onclick="askQuickQuestion('online')">Bao nhiêu người online?</button>
+                <button class="quick-question" onclick="askQuickQuestion('popular')">Rank nào phổ biến nhất?</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chart.js for activity chart -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+    <script src="stats.js"></script>
+</body>
+</html>
