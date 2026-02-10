@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chợ Đen | STELA SMP</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="images/logo.png">
+    <style>
+        /* Additional styles for black market */
+        .blackmarket-header {
+            text-align: center;
+            padding: 40px 0;
+            background: linear-gradient(135deg, rgba(44, 44, 44, 0.9), rgba(28, 28, 28, 0.9));
+            border-radius: var(--border-radius);
+            margin-bottom: 40px;
+            border: 1px solid var(--medium-gray);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .blackmarket-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="none"/><path d="M20,20 L80,80 M80,20 L20,80" stroke="%23333" stroke-width="1"/></svg>');
+            opacity: 0.1;
+        }
+        
+        .blackmarket-header h1 {
+            color: #ff6b6b;
+            font-size: 3rem;
+        }
+        
+        .warning-banner {
+            background-color: rgba(239, 71, 111, 0.1);
+            border-left: 4px solid var(--danger);
+            padding: 15px 20px;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+        
+        .warning-icon {
+            color: var(--danger);
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+        
+        .post-form {
+            background-color: var(--dark-gray);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            margin-bottom: 50px;
+            border: 1px solid var(--medium-gray);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-input, .form-textarea {
+            width: 100%;
+            padding: 12px 15px;
+            background-color: var(--dark);
+            border: 1px solid var(--light-gray);
+            border-radius: var(--border-radius);
+            color: var(--text);
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .form-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .form-input:focus, .form-textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .listings-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        .listing-card {
+            background-color: var(--dark-gray);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            border: 1px solid var(--medium-gray);
+            transition: var(--transition);
+        }
+        
+        .listing-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            border-color: #ff6b6b;
+        }
+        
+        .listing-header {
+            padding: 20px;
+            border-bottom: 1px solid var(--medium-gray);
+            background-color: rgba(44, 44, 44, 0.9);
+        }
+        
+        .listing-name {
+            font-size: 1.4rem;
+            margin-bottom: 5px;
+            color: #ff8e53;
+        }
+        
+        .listing-price {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #ff6b6b;
+        }
+        
+        .listing-body {
+            padding: 20px;
+        }
+        
+        .listing-desc {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+        
+        .listing-footer {
+            padding: 15px 20px;
+            border-top: 1px solid var(--medium-gray);
+            background-color: rgba(44, 44, 44, 0.5);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .seller-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .seller-avatar {
+            width: 30px;
+            height: 30px;
+            background-color: var(--secondary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+        }
+        
+        .seller-name {
+            font-weight: 500;
+        }
+        
+        .btn-contact {
+            background-color: #5865f2;
+            color: white;
+            border: none;
+            border-radius: var(--border-radius);
+            padding: 8px 16px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-contact:hover {
+            background-color: #4752c4;
+        }
+        
+        .no-listings {
+            text-align: center;
+            padding: 50px 20px;
+            color: var(--text-secondary);
+        }
+        
+        .no-listings i {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--medium-gray);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <img src="images/logo.png" alt="STELA SMP Logo" class="logo">
+                <span class="brand-text">STELA SMP</span>
+            </div>
+            
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link">
+                    <i class="fas fa-store"></i> Store
+                </a>
+                <a href="stats.html" class="nav-link">
+                    <i class="fas fa-chart-bar"></i> Stats
+                </a>
+                <a href="blackmarket.html" class="nav-link active">
+                    <i class="fas fa-moon"></i> Chợ Đen
+                </a>
+                <a href="discord.html" class="nav-link">
+                    <i class="fab fa-discord"></i> Join Discord
+                </a>
+            </div>
+            
+            <div class="nav-actions">
+                <div class="server-info">
+                    <div class="server-ip">
+                        <span class="ip-label">IP:</span>
+                        <code id="server-ip">Stelasmp.online</code>
+                        <button class="copy-btn" onclick="copyIP()">
+                            <i class="far fa-copy"></i>
+                        </button>
+                    </div>
+                    <div class="server-status online">
+                        <span class="status-dot"></span>
+                        Online
+                    </div>
+                </div>
+                <button class="btn-discord" onclick="window.location.href='discord.html'">
+                    <i class="fab fa-discord"></i> Discord
+                </button>
+            </div>
+            
+            <button class="nav-toggle" id="navToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Black Market Main Content -->
+    <main class="main-container">
+        <header class="blackmarket-header">
+            <h1><i class="fas fa-moon"></i> Chợ Đen STELA</h1>
+            <p class="stats-subtitle">Trao đổi vật phẩm Minecraft giữa người chơi</p>
+        </header>
+
+        <!-- Warning Banner -->
+        <div class="warning-banner">
+            <div class="warning-icon">
+                <i class="fas fa-exclamation-triangle"></i>
+            </div>
+            <div>
+                <h3>Lưu ý quan trọng</h3>
+                <p>Chợ Đen là nơi người chơi tự trao đổi vật phẩm. STELA SMP không chịu trách nhiệm cho các giao dịch giữa người chơi. Hãy cẩn thận với các giao dịch và chỉ trao đổi với người chơi đáng tin cậy. Báo cáo lừa đảo cho Admin qua Discord.</p>
+            </div>
+        </div>
+
+        <!-- Post Listing Form -->
+        <section class="post-form">
+            <h2><i class="fas fa-plus-circle"></i> Đăng bán vật phẩm</h2>
+            <p class="section-subtitle">Đăng vật phẩm của bạn lên Chợ Đen</p>
+            
+            <form id="listingForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label" for="itemName">Tên vật phẩm *</label>
+                        <input type="text" id="itemName" class="form-input" placeholder="Ví dụ: Diamond Sword Sharpness V" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="itemPrice">Giá (VNĐ) *</label>
+                        <input type="number" id="itemPrice" class="form-input" placeholder="Ví dụ: 50000" min="1000" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="itemDescription">Mô tả vật phẩm *</label>
+                    <textarea id="itemDescription" class="form-textarea" placeholder="Mô tả chi tiết về vật phẩm, enchantments, độ bền, v.v." required></textarea>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label" for="sellerName">Tên người bán (trong game) *</label>
+                        <input type="text" id="sellerName" class="form-input" placeholder="Ví dụ: Notch_Pro" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="discordContact">Discord liên hệ *</label>
+                        <input type="text" id="discordContact" class="form-input" placeholder="Ví dụ: notchpro#1234" required>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn-buy" style="margin-top: 10px;">
+                    <i class="fas fa-paper-plane"></i> Đăng bán ngay
+                </button>
+            </form>
+        </section>
+
+        <!-- Current Listings -->
+        <section class="store-section">
+            <h2><i class="fas fa-box-open"></i> Vật phẩm đang bán</h2>
+            <p class="section-subtitle">Danh sách vật phẩm được người chơi đăng bán</p>
+            
+            <div class="listings-grid" id="listingsContainer">
+                <!-- Listings will be loaded here by JavaScript -->
+            </div>
+            
+            <div class="no-listings" id="noListingsMessage" style="display: none;">
+                <i class="fas fa-box-open"></i>
+                <h3>Chưa có vật phẩm nào được đăng bán</h3>
+                <p>Hãy là người đầu tiên đăng bán vật phẩm trên Chợ Đen!</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>STELA SMP</h3>
+                <p>Minecraft Survival Multiplayer Server</p>
+                <div class="server-ip-footer">
+                    <strong>IP:</strong> <code>Stelasmp.online</code>
+                    <button class="copy-btn small" onclick="copyIP()">
+                        <i class="far fa-copy"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Liên Kết Nhanh</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Store</a></li>
+                    <li><a href="stats.html">Stats</a></li>
+                    <li><a href="blackmarket.html">Chợ Đen</a></li>
+                    <li><a href="discord.html">Discord</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Hỗ Trợ</h3>
+                <ul class="footer-links">
+                    <li><a href="#" onclick="openSupportChat()">Chat với AI Support</a></li>
+                    <li><a href="discord.html">Liên hệ Admin</a></li>
+                    <li><a href="#">Hướng dẫn thanh toán</a></li>
+                    <li><a href="#">Câu hỏi thường gặp</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Theo Dõi Chúng Tôi</h3>
+                <div class="social-links">
+                    <a href="discord.html" class="social-link discord">
+                        <i class="fab fa-discord"></i>
+                    </a>
+                    <a href="#" class="social-link youtube">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                    <a href="#" class="social-link tiktok">
+                        <i class="fab fa-tiktok"></i>
+                    </a>
+                    <a href="#" class="social-link facebook">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2023 STELA SMP. Tất cả quyền được bảo lưu. Minecraft là thương hiệu của Mojang AB.</p>
+            <p>Website này không liên kết chính thức với Mojang/Microsoft.</p>
+        </div>
+    </footer>
+
+    <!-- AI Chat Support -->
+    <div class="ai-chat-container" id="aiChatContainer">
+        <div class="ai-chat-header" onclick="toggleChat()">
+            <div class="ai-chat-title">
+                <i class="fas fa-robot"></i>
+                <span>STELA AI Support</span>
+            </div>
+            <div class="ai-chat-toggle">
+                <i class="fas fa-chevron-down" id="chatToggleIcon"></i>
+            </div>
+        </div>
+        <div class="ai-chat-body" id="chatBody">
+            <div class="ai-chat-messages" id="chatMessages">
+                <div class="ai-message">
+                    <div class="ai-avatar">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="ai-text">
+                        <p>Xin chào! Đây là Chợ Đen STELA SMP.</p>
+                        <p>Tôi có thể giúp bạn:</p>
+                        <ul>
+                            <li>Hướng dẫn đăng bán vật phẩm</li>
+                            <li>Tìm vật phẩm bạn cần</li>
+                            <li>Lưu ý an toàn khi giao dịch</li>
+                            <li>Liên hệ Admin nếu gặp vấn đề</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="ai-chat-input">
+                <input type="text" id="chatInput" placeholder="Nhập câu hỏi của bạn...">
+                <button onclick="sendMessage()">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+            <div class="ai-quick-questions">
+                <button class="quick-question" onclick="askQuickQuestion('post')">Cách đăng bán?</button>
+                <button class="quick-question" onclick="askQuickQuestion('safety')">Làm sao an toàn?</button>
+                <button class="quick-question" onclick="askQuickQuestion('report')">Báo cáo lừa đảo?</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="blackmarket.js"></script>
+</body>
+</html>
